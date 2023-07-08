@@ -1,17 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
+[RequireComponent (typeof(SpriteRenderer))]
+[RequireComponent (typeof(Animator))]
 public class Hauntable : MonoBehaviour
 {
+    public static readonly HashSet<Hauntable> Furniture = new HashSet<Hauntable>();
+
     private SpriteRenderer _spriteRenderer;
 
-    public Material hauntMaterial;
-    public Material unHauntMaterial;
+    // public AudioClip scareSound;
+    public Sprite normalSprite;
+    public Sprite hauntedSprite;
     
+    private static readonly int IsHaunted = Animator.StringToHash("IsHaunted");
+    private static readonly int Scare = Animator.StringToHash("Scare");
+
     private void Start()
     {
+        Furniture.Add(this);
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
     
@@ -22,11 +29,16 @@ public class Hauntable : MonoBehaviour
     
     public void Haunt()
     {
-        _spriteRenderer.material = hauntMaterial;
+        _spriteRenderer.sprite = hauntedSprite;
     }
     
     public void UnHaunt()
     {
-        _spriteRenderer.material = unHauntMaterial;
+        _spriteRenderer.sprite = normalSprite;
+    }
+
+    public void ObjectScare()
+    {
+        
     }
 }
