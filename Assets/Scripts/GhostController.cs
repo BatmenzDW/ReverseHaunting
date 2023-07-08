@@ -1,4 +1,3 @@
-
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -6,7 +5,7 @@ using UnityEngine.UI;
 
 
 [RequireComponent (typeof(Rigidbody))]
-
+[RequireComponent (typeof(SpriteRenderer))]
 public class GhostController : MonoBehaviour
 {
     [SerializeField]
@@ -20,23 +19,21 @@ public class GhostController : MonoBehaviour
 
 
     public float movementSpeed { get; set; }
-    public AudioClip scareA;
-    public AudioClip scareB;
-    public AudioClip scareC;
-    public AudioSource audioSource;
+    public float possessDistance = 5.0f;
+    public float possessSpeed = 2.0f;
+    public SfxController sfkController;
     
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
-    private static readonly int HauntStart = Animator.StringToHash("HauntStart");
-    private static readonly int HauntEnd = Animator.StringToHash("HauntEnd");
+    private static readonly int Haunting = Animator.StringToHash("Haunting");
     private Hauntable Haunted { get; set; }
+    private bool _startHaunt;
 
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         currentGhostStamina = maxGhostStamina;
-
     }
     
     private void Update()
@@ -44,28 +41,42 @@ public class GhostController : MonoBehaviour
         movementSpeed = attributesScriptableObject.Speed;
         var distance = movementSpeed * Time.deltaTime;
         var movement = new Vector3();
-        if (Input.GetKey(KeyCode.W))
+        if (Haunted is null && AnimatorIsPlaying("GhostIdle"))
         {
-                movement = transform.up * distance;
+            if (Input.GetKey(KeyCode.W))
+            {
+                    movement = transform.up * distance;
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                movement = -transform.up * distance;
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                movement = -transform.right * distance;
+                _spriteRenderer.flipX = false;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                movement = transform.right * distance;
+                _spriteRenderer.flipX = true;
+            }
+            
         }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            movement = -transform.up * distance;
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            movement = -transform.right * distance;
-            _spriteRenderer.flipX = false;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            movement = transform.right * distance;
-            _spriteRenderer.flipX = true;
-        }
-
-        transform.position += movement;
 
         if (Input.GetKey(KeyCode.E))
+        {
+            if (Haunted is null && AnimatorIsPlaying("GhostIdle"))
+            {
+                _startHaunt = false;
+                HauntObject();
+            }
+            else if (AnimatorIsPlaying("Haunting"))
+            {
+                UnHauntObject();
+            }
+        }
+        else if (Input.GetKey(KeyCode.Q))
         {
             Scare();
         }
@@ -76,17 +87,26 @@ public class GhostController : MonoBehaviour
 
             // Increase movement speed when Left Shift is held down
             movement *= 2f; // You can adjust the multiplier to increase or decrease the speed boost
-            transform.position += movement;
 
             currentGhostStamina -= sprintStaminaDepletionRate * Time.deltaTime; // Adjust depletion rate as needed
         }
+        transform.position += movement;
         staminaText.text = "Stamina: " + currentGhostStamina + "%";
 
         if (currentGhostStamina > maxGhostStamina ) currentGhostStamina = maxGhostStamina;
 
         
-        
-       
+        if (_startHaunt && !(Haunted is null))
+        {
+            if (Haunted.transform.position - transform.position != new Vector3())
+            {
+                transform.position = Vector3.MoveTowards(transform.position, Haunted.transform.position, movementSpeed * possessSpeed * Time.deltaTime);
+            }
+            else
+            {
+                HauntObject();
+            }
+        }
     }
 
     public bool StaminaUse()
@@ -117,29 +137,61 @@ public class GhostController : MonoBehaviour
         UnHauntObject();
     }
 
-    private void HauntObject(Hauntable toHaunt)
+    private void HauntObject()
     {
-        Haunted = toHaunt;
+        Haunted = GetNearestInRange();
+        if (Haunted is null) return;
+        if (!_startHaunt)
+        {
+            _startHaunt = true;
+            return;
+        }
+
         Haunted.Haunt();
-        _animator.SetTrigger(HauntStart);
+        _animator.SetBool(Haunting,true );
+        sfkController.PlaySound("PossessingAnObject");
+        _startHaunt = false;
+     }
+     
+     private Hauntable GetNearestInRange()
+    {
+        var pos = transform.position;
+        var dist = float.PositiveInfinity;
+        Hauntable targ = null;
+        foreach (var obj in Hauntable.Furniture)
+        {
+            var d = (pos - obj.transform.position).sqrMagnitude;
+            if (!(d < dist)||d > possessDistance) continue;
+            targ = obj;
+            dist = d;
+        }
+
+        return targ;
     }
 
     private void UnHauntObject()
     {
+        if (Haunted is null) return;
         Haunted.UnHaunt();
-        _animator.SetTrigger(HauntEnd);
+        _animator.SetBool(Haunting,false );
         Haunted = null;
+        sfkController.PlaySound("LeavingAnObject");
     }
 
     private void Scare()
     {
-        if (audioSource.isPlaying) return;
-        audioSource.clip = Random.Range(0, 2) switch
-        {
-            0 => scareA,
-            1 => scareB,
-            _ => scareC
-        };
-        audioSource.Play();
+        if (Haunted is null) return;
+        
+        Haunted.ObjectScare();
+    }
+
+    private void Suprise()
+    {
+
+    }
+
+    private bool AnimatorIsPlaying(string stateName)
+    {
+        return _animator.GetCurrentAnimatorStateInfo(0).IsName(stateName)
     }
 }
