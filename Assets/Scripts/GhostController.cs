@@ -1,24 +1,18 @@
-using System;
+
 using UnityEngine;
-using Random = UnityEngine.Random;
 using UnityEngine.UI;
 
-
-[RequireComponent (typeof(Rigidbody))]
 [RequireComponent (typeof(SpriteRenderer))]
 public class GhostController : MonoBehaviour
 {
     [SerializeField]
     private AttributesScriptableObject attributesScriptableObject;
-
-
-    [SerializeField]
-    public Text staminaText;
+    
+    // [SerializeField]
+    // public Text staminaText;
     public float maxGhostStamina = 100;
-    public float currentGhostStamina { get; set; }
-
-
-    public float movementSpeed { get; set; }
+    private float _currentGhostStamina;
+    private float _movementSpeed;
     public float possessDistance = 5.0f;
     public float possessSpeed = 2.0f;
     public SfxController sfkController;
@@ -33,13 +27,13 @@ public class GhostController : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-        currentGhostStamina = maxGhostStamina;
+        _currentGhostStamina = maxGhostStamina;
     }
     
     private void Update()
     {
-        movementSpeed = attributesScriptableObject.Speed;
-        var distance = movementSpeed * Time.deltaTime;
+        _movementSpeed = attributesScriptableObject.Speed;
+        var distance = _movementSpeed * Time.deltaTime;
         var movement = new Vector3();
         if (Haunted is null && AnimatorIsPlaying("GhostIdle"))
         {
@@ -81,26 +75,26 @@ public class GhostController : MonoBehaviour
             Scare();
         }
 
-        if (Input.GetKey(KeyCode.LeftShift) && currentGhostStamina > 0)
+        if (Input.GetKey(KeyCode.LeftShift) && _currentGhostStamina > 0)
         {
             float sprintStaminaDepletionRate = 10;
 
             // Increase movement speed when Left Shift is held down
             movement *= 2f; // You can adjust the multiplier to increase or decrease the speed boost
 
-            currentGhostStamina -= sprintStaminaDepletionRate * Time.deltaTime; // Adjust depletion rate as needed
+            _currentGhostStamina -= sprintStaminaDepletionRate * Time.deltaTime; // Adjust depletion rate as needed
         }
         transform.position += movement;
-        staminaText.text = "Stamina: " + currentGhostStamina + "%";
+        // staminaText.text = "Stamina: " + _currentGhostStamina + "%";
 
-        if (currentGhostStamina > maxGhostStamina ) currentGhostStamina = maxGhostStamina;
+        if (_currentGhostStamina > maxGhostStamina ) _currentGhostStamina = maxGhostStamina;
 
         
         if (_startHaunt && !(Haunted is null))
         {
             if (Haunted.transform.position - transform.position != new Vector3())
             {
-                transform.position = Vector3.MoveTowards(transform.position, Haunted.transform.position, movementSpeed * possessSpeed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, Haunted.transform.position, _movementSpeed * possessSpeed * Time.deltaTime);
             }
             else
             {
@@ -117,10 +111,10 @@ public class GhostController : MonoBehaviour
     public void StaminaRecover(float recoverValue)
     {
         float staminaRecoveryRate = 10;
-        if (!StaminaUse() && currentGhostStamina < maxGhostStamina)
+        if (!StaminaUse() && _currentGhostStamina < maxGhostStamina)
         {
-            currentGhostStamina += staminaRecoveryRate * Time.deltaTime;
-            currentGhostStamina = Mathf.Clamp(currentGhostStamina, 0f, maxGhostStamina);
+            _currentGhostStamina += staminaRecoveryRate * Time.deltaTime;
+            _currentGhostStamina = Mathf.Clamp(_currentGhostStamina, 0f, maxGhostStamina);
         }
     }
 
