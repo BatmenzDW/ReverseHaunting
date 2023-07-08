@@ -1,18 +1,30 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
+
+[RequireComponent (typeof(Rigidbody))]
 [RequireComponent (typeof(SpriteRenderer))]
-[RequireComponent (typeof(Animator))]
 public class GhostController : MonoBehaviour
 {
-    public float movementSpeed = 5.0f;
+    [SerializeField]
+    private AttributesScriptableObject attributesScriptableObject;
+
+
+    [SerializeField]
+    public Text staminaText;
+    public float maxGhostStamina = 100;
+    public float currentGhostStamina { get; set; }
+
+
+    public float movementSpeed { get; set; }
     public float possessDistance = 5.0f;
     public float possessSpeed = 2.0f;
-    
     public SfxController sfkController;
     
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
-    
     private static readonly int Haunting = Animator.StringToHash("Haunting");
     private Hauntable Haunted { get; set; }
     private bool _startHaunt;
@@ -21,13 +33,12 @@ public class GhostController : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        currentGhostStamina = maxGhostStamina;
     }
     
     private void Update()
     {
-        // Sets Rotation to 0 to avoid weird spin glitch
-        transform.rotation = new Quaternion();
-        
+        movementSpeed = attributesScriptableObject.Speed;
         var distance = movementSpeed * Time.deltaTime;
         var movement = new Vector3();
         if (Haunted is null && AnimatorIsPlaying("GhostIdle"))
@@ -50,7 +61,7 @@ public class GhostController : MonoBehaviour
                 movement = transform.right * distance;
                 _spriteRenderer.flipX = true;
             }
-            transform.position += movement;
+            
         }
 
         if (Input.GetKey(KeyCode.E))
@@ -70,6 +81,21 @@ public class GhostController : MonoBehaviour
             Scare();
         }
 
+        if (Input.GetKey(KeyCode.LeftShift) && currentGhostStamina > 0)
+        {
+            float sprintStaminaDepletionRate = 10;
+
+            // Increase movement speed when Left Shift is held down
+            movement *= 2f; // You can adjust the multiplier to increase or decrease the speed boost
+
+            currentGhostStamina -= sprintStaminaDepletionRate * Time.deltaTime; // Adjust depletion rate as needed
+        }
+        transform.position += movement;
+        staminaText.text = "Stamina: " + currentGhostStamina + "%";
+
+        if (currentGhostStamina > maxGhostStamina ) currentGhostStamina = maxGhostStamina;
+
+        
         if (_startHaunt && !(Haunted is null))
         {
             if (Haunted.transform.position - transform.position != new Vector3())
@@ -83,20 +109,32 @@ public class GhostController : MonoBehaviour
         }
     }
 
-    private Hauntable GetNearestInRange()
+    public bool StaminaUse()
     {
-        var pos = transform.position;
-        var dist = float.PositiveInfinity;
-        Hauntable targ = null;
-        foreach (var obj in Hauntable.Furniture)
-        {
-            var d = (pos - obj.transform.position).sqrMagnitude;
-            if (!(d < dist)||d > possessDistance) continue;
-            targ = obj;
-            dist = d;
-        }
+       return Input.GetKey(KeyCode.LeftShift); 
+    }
 
-        return targ;
+    public void StaminaRecover(float recoverValue)
+    {
+        float staminaRecoveryRate = 10;
+        if (!StaminaUse() && currentGhostStamina < maxGhostStamina)
+        {
+            currentGhostStamina += staminaRecoveryRate * Time.deltaTime;
+            currentGhostStamina = Mathf.Clamp(currentGhostStamina, 0f, maxGhostStamina);
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (!other.gameObject.tag.Equals("Hauntable")) return;
+        var hauntable = other.gameObject.GetComponent<Hauntable>();
+        HauntObject(hauntable);
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (!other.gameObject.tag.Equals("Hauntable")) return;
+        UnHauntObject();
     }
 
     private void HauntObject()
@@ -113,6 +151,22 @@ public class GhostController : MonoBehaviour
         _animator.SetBool(Haunting,true );
         sfkController.PlaySound("PossessingAnObject");
         _startHaunt = false;
+     }
+     
+     private Hauntable GetNearestInRange()
+    {
+        var pos = transform.position;
+        var dist = float.PositiveInfinity;
+        Hauntable targ = null;
+        foreach (var obj in Hauntable.Furniture)
+        {
+            var d = (pos - obj.transform.position).sqrMagnitude;
+            if (!(d < dist)||d > possessDistance) continue;
+            targ = obj;
+            dist = d;
+        }
+
+        return targ;
     }
 
     private void UnHauntObject()
@@ -136,7 +190,8 @@ public class GhostController : MonoBehaviour
 
     }
 
-    private bool AnimatorIsPlaying(string stateName){
-        return _animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
+    private bool AnimatorIsPlaying(string stateName)
+    {
+        return _animator.GetCurrentAnimatorStateInfo(0).IsName(stateName)
     }
 }
