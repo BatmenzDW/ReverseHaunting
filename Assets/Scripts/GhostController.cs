@@ -124,19 +124,6 @@ public class GhostController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (!other.gameObject.tag.Equals("Hauntable")) return;
-        var hauntable = other.gameObject.GetComponent<Hauntable>();
-        HauntObject(hauntable);
-    }
-
-    private void OnCollisionExit(Collision other)
-    {
-        if (!other.gameObject.tag.Equals("Hauntable")) return;
-        UnHauntObject();
-    }
-
     private void HauntObject()
     {
         Haunted = GetNearestInRange();
@@ -192,6 +179,6 @@ public class GhostController : MonoBehaviour
 
     private bool AnimatorIsPlaying(string stateName)
     {
-        return _animator.GetCurrentAnimatorStateInfo(0).IsName(stateName)
+        return _animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
     }
 }
