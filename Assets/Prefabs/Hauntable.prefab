@@ -59,8 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ddd7973f83a2904887f0d1d12096ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSprite: {fileID: 0}
-  hauntedSprite: {fileID: 0}
+  furnitureSprites: {fileID: 11400000, guid: 2dd9b2ebd64dac141aa3635be2724686, type: 2}
+  spriteIndex: 0
 --- !u!212 &1641087935668144550
 SpriteRenderer:
   m_ObjectHideFlags: 0
