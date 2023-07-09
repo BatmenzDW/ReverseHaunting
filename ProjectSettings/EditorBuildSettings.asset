@@ -7,8 +7,14 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
-    guid: ad88c59bdd1e9ab4bb53a93c64fc543b
+    guid: f7b688423f3526140a26584de83bd6b6
   - enabled: 1
     path: Assets/Scenes/Level_1.unity
     guid: d9dbcf4d8db61504a99d6adcf58150b9
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: 5cce7b38420972c48a900a76cdaccf55
+  - enabled: 1
+    path: Assets/Scenes/LoseScreen.unity
+    guid: 0e892095d78d30c4dbad57b1f737beef
   m_configObjects: {}

@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -14,7 +16,11 @@ public class GameController : MonoBehaviour
     [SerializeField] private Transform dayNightWheel;
     [SerializeField] private Image staminaWheel;
     [SerializeField] private TextMeshProUGUI valueText;
-    [SerializeField] private DoorController door;
+    [SerializeField] private Image visibilityIndicator;
+
+    public Sprite visibleSprite;
+    public Sprite notVisibleSprite;
+    public Sprite spottedSprite;
 
     public Color unfatiguedColor;
     public Color fatiguedColor;
@@ -41,15 +47,47 @@ public class GameController : MonoBehaviour
         if (_nightTime >= nightDurationInSeconds) _nightOver = true;
 
         valueText.text = $"{_houseValue}";
+        
+        if (_nightOver && _houseValue > 0) Win(); 
     }
 
     private void LoseValue(int value)
     {
         _houseValue -= value;
         _houseValue = Mathf.Clamp(_houseValue, 0, startingHouseValue);
+
+        if (_houseValue <= 0) Lose();
     }
 
     public void SetStaminaPercent(float percent) => staminaWheel.fillAmount = percent;
 
     public void SetFatigued(bool fatigue) => staminaWheel.color = fatigue ? fatiguedColor : unfatiguedColor;
+
+    public void SetVisibility(VisibilityEnum visibility)
+    {
+        switch (visibility)
+        {
+            case VisibilityEnum.Visible:
+                visibilityIndicator.sprite = visibleSprite;
+                return;
+            case VisibilityEnum.Spotted:
+                visibilityIndicator.sprite = spottedSprite;
+                return;
+            case VisibilityEnum.NotVisible:
+                visibilityIndicator.sprite = notVisibleSprite;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(visibility), visibility, null);
+        }
+    }
+
+    public void Win()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void Lose()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 }

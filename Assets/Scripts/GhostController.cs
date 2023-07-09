@@ -16,9 +16,19 @@ public class GhostController : MonoBehaviour
     public float sprintStaminaDepletionRate = 10;
     public float possessStaminaDepletionRate = 10;
     public SfxController sfkController;
-    
-    public bool Spotted { get; set; }
-    public bool Visible { get; set; } = true;
+
+    private VisibilityEnum _viz = VisibilityEnum.Visible;
+
+    private VisibilityEnum Visibility
+    {
+        get => _viz;
+        set
+        {
+            gameController.SetVisibility(value);
+            _viz = value;
+        }
+    }
+
     public bool Fatigued { get; set; }
     private bool _ftg;
     
@@ -31,6 +41,7 @@ public class GhostController : MonoBehaviour
 
     private void Start()
     {
+        gameController.SetVisibility(_viz);
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _maxGhostStamina = attributesScriptableObject.Stamina;
@@ -41,15 +52,22 @@ public class GhostController : MonoBehaviour
 
     public void OnSpotted(bool isSpotted)
     {
-        Spotted = isSpotted;
+        Visibility = VisibilityEnum.Spotted;
         _animator.SetBool(SpottedTag, isSpotted);
     }
+
+    private static bool IsVisible(VisibilityEnum viz) => viz switch
+    {
+        VisibilityEnum.Spotted => true,
+        VisibilityEnum.Visible => true,
+        _ => false
+    };
     
     private void Update()
     {
         var distance = _movementSpeed * Time.deltaTime;
         var movement = new Vector3();
-        if (Haunted is null && Visible)
+        if (Haunted is null && IsVisible(Visibility))
         {
             if (Input.GetKey(KeyCode.W))
             {
@@ -73,7 +91,7 @@ public class GhostController : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.E) && !Fatigued && _ftg)
-            if (Haunted is null && Visible)
+            if (Haunted is null && IsVisible(Visibility))
                 HauntObject();
         
         if (Input.GetKeyUp(KeyCode.E)) UnHauntObject();
@@ -92,7 +110,7 @@ public class GhostController : MonoBehaviour
 
         if (_currentGhostStamina > _maxGhostStamina ) _currentGhostStamina = _maxGhostStamina;
         
-        if (Visible && !(Haunted is null))
+        if (IsVisible(Visibility) && !(Haunted is null))
         {
             if (Haunted.transform.position - transform.position != new Vector3())
             {
@@ -152,12 +170,12 @@ public class GhostController : MonoBehaviour
     private void HauntObject()
     {
         Haunted = GetNearestInRange();
-        if (Haunted is null || !Visible) return;
+        if (Haunted is null || !IsVisible(Visibility)) return;
 
         Haunted.Haunt();
         _animator.SetBool(Haunting,true );
         sfkController.PlaySound("PossessingAnObject");
-        Visible = false;
+        Visibility = VisibilityEnum.NotVisible;
     }
      
      private Hauntable GetNearestInRange()
@@ -181,7 +199,7 @@ public class GhostController : MonoBehaviour
         if (Haunted is null || !AnimatorIsPlaying("Haunting")) return;
         Haunted.UnHaunt();
         _animator.SetBool(Haunting,false );
-        Visible = true;
+        Visibility = VisibilityEnum.Visible;
         Haunted = null;
         sfkController.PlaySound("LeavingAnObject");
     }

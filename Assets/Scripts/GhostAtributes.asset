@@ -15,10 +15,10 @@ MonoBehaviour:
   Icon: {fileID: 0}
   Name: 
   Health: 0
-  Speed: 3
-  Stamina: 0
+  Speed: 1
+  Stamina: 100
   ScareMeter: 0
-  PossesionRange: 0
+  PossesionRange: 5
   Weight: 0
   Description: 
   Notes: 
