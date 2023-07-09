@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Object", menuName = "Object")]
+[CreateAssetMenu(fileName = "New Object", menuName = "AttributeObject")]
 public class AttributesScriptableObject : ScriptableObject
 {
     public Sprite Icon;
