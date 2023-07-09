@@ -134,6 +134,72 @@ TextureImporter:
   - first:
       213: 2892929601531678307
     second: furniture_haunted_43
+  - first:
+      213: -3066331253501946447
+    second: furniture_haunted_44
+  - first:
+      213: -8225068143767413823
+    second: furniture_haunted_45
+  - first:
+      213: 7598895101043962860
+    second: furniture_haunted_49
+  - first:
+      213: 5472261401379027569
+    second: furniture_haunted_34
+  - first:
+      213: 2070332225891520126
+    second: furniture_haunted_46
+  - first:
+      213: -4337643001903767785
+    second: furniture_haunted_47
+  - first:
+      213: -1067107848947845824
+    second: furniture_haunted_48
+  - first:
+      213: 1658217630826753561
+    second: furniture_haunted_60
+  - first:
+      213: -6499276957217038334
+    second: furniture_haunted_61
+  - first:
+      213: 1778025235904426741
+    second: furniture_haunted_62
+  - first:
+      213: -7522694855865775526
+    second: furniture_haunted_63
+  - first:
+      213: 7229455332642177767
+    second: furniture_haunted_64
+  - first:
+      213: 4990144715924540236
+    second: furniture_haunted_65
+  - first:
+      213: 6065331486665361298
+    second: furniture_haunted_66
+  - first:
+      213: 1155051670593774512
+    second: furniture_haunted_67
+  - first:
+      213: -56478107926913039
+    second: furniture_haunted_68
+  - first:
+      213: 9035061109579609629
+    second: furniture_haunted_69
+  - first:
+      213: -504071998639583109
+    second: furniture_haunted_70
+  - first:
+      213: 647831548249563413
+    second: furniture_haunted_71
+  - first:
+      213: 4429459845019489215
+    second: furniture_haunted_72
+  - first:
+      213: -464890673219570896
+    second: furniture_haunted_73
+  - first:
+      213: 3798915020142544555
+    second: furniture_haunted_74
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -239,11 +305,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 80
+        y: 192
         width: 25
         height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -260,11 +326,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 80
+        y: 192
         width: 25
         height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -281,11 +347,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 80
+        y: 192
         width: 25
         height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -302,11 +368,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 80
+        y: 192
         width: 25
         height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -323,11 +389,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 80
+        y: 192
         width: 25
         height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -344,11 +410,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 160
-        y: 80
+        y: 192
         width: 25
         height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -365,11 +431,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 80
+        y: 192
         width: 25
         height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -386,11 +452,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 224
-        y: 80
+        y: 192
         width: 26
         height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -407,11 +473,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 80
+        y: 192
         width: 31
         height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -427,12 +493,12 @@ TextureImporter:
       name: furniture_haunted_9
       rect:
         serializedVersion: 2
-        x: 304
-        y: 80
-        width: 42
+        x: 306
+        y: 192
+        width: 40
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -448,12 +514,12 @@ TextureImporter:
       name: furniture_haunted_10
       rect:
         serializedVersion: 2
-        x: 352
-        y: 80
-        width: 31
+        x: 354
+        y: 192
+        width: 29
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -469,12 +535,12 @@ TextureImporter:
       name: furniture_haunted_11
       rect:
         serializedVersion: 2
-        x: 400
-        y: 80
-        width: 31
+        x: 402
+        y: 192
+        width: 29
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -490,12 +556,12 @@ TextureImporter:
       name: furniture_haunted_12
       rect:
         serializedVersion: 2
-        x: 448
-        y: 80
-        width: 24
+        x: 451
+        y: 192
+        width: 21
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -512,11 +578,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 480
-        y: 80
+        y: 192
         width: 28
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -533,11 +599,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 80
+        y: 192
         width: 50
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -554,11 +620,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 576
-        y: 80
+        y: 192
         width: 28
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -575,11 +641,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 624
-        y: 80
+        y: 192
         width: 50
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -596,11 +662,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 48
+        y: 160
         width: 44
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -617,11 +683,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 48
+        y: 160
         width: 44
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -638,11 +704,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 112
-        y: 48
+        y: 160
         width: 27
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -659,11 +725,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 160
-        y: 48
+        y: 160
         width: 27
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -680,11 +746,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 48
+        y: 160
         width: 55
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -701,11 +767,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 259
-        y: 48
+        y: 160
         width: 68
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -722,11 +788,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 338
-        y: 48
+        y: 160
         width: 19
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -743,11 +809,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 368
-        y: 48
+        y: 160
         width: 16
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -764,11 +830,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 400
-        y: 48
+        y: 160
         width: 18
         height: 23
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -785,11 +851,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 432
-        y: 48
+        y: 160
         width: 19
         height: 23
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -806,11 +872,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 464
-        y: 48
+        y: 160
         width: 19
         height: 23
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -827,11 +893,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 496
-        y: 48
+        y: 160
         width: 16
         height: 23
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -848,11 +914,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 528
-        y: 48
+        y: 160
         width: 31
         height: 19
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -869,11 +935,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 576
-        y: 48
+        y: 160
         width: 31
         height: 19
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -890,11 +956,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 624
-        y: 48
+        y: 160
         width: 53
         height: 21
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -911,11 +977,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 112
         width: 42
         height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -932,11 +998,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 80
-        y: 0
+        y: 112
         width: 56
         height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -949,36 +1015,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: furniture_haunted_34
-      rect:
-        serializedVersion: 2
-        x: 149
-        y: 24
-        width: 25
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9f12421568e680ad0800000000000000
-      internalID: -2735815250461580807
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: furniture_haunted_35
       rect:
         serializedVersion: 2
         x: 192
-        y: 9
+        y: 121
         width: 16
         height: 23
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -995,11 +1040,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 224
-        y: 0
+        y: 112
         width: 16
         height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1016,11 +1061,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 0
+        y: 112
         width: 21
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1037,11 +1082,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 288
-        y: 0
+        y: 112
         width: 24
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1058,11 +1103,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 320
-        y: 7
+        y: 119
         width: 27
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1079,11 +1124,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 352
-        y: 15
+        y: 127
         width: 13
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1100,11 +1145,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 368
-        y: 0
+        y: 112
         width: 22
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1120,12 +1165,12 @@ TextureImporter:
       name: furniture_haunted_42
       rect:
         serializedVersion: 2
-        x: 48
-        y: 0
-        width: 24
-        height: 23
+        x: 400
+        y: 120
+        width: 21
+        height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1141,12 +1186,12 @@ TextureImporter:
       name: furniture_haunted_43
       rect:
         serializedVersion: 2
-        x: 151
-        y: 0
+        x: 432
+        y: 120
         width: 21
-        height: 23
+        height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1154,6 +1199,468 @@ TextureImporter:
       bones: []
       spriteID: 36e028b2520c52820800000000000000
       internalID: 2892929601531678307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_44
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 113
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b5965798f33275d0800000000000000
+      internalID: -3066331253501946447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_45
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 113
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cb9c5df910badd80800000000000000
+      internalID: -8225068143767413823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_49
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 112
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce37e2f65d2b47960800000000000000
+      internalID: 7598895101043962860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_34
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 116
+        width: 25
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17a374350c061fb40800000000000000
+      internalID: 5472261401379027569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_46
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 112
+        width: 40
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7ece4bb03c4bbc10800000000000000
+      internalID: 2070332225891520126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_47
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 112
+        width: 26
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71f111deba89dc3c0800000000000000
+      internalID: -4337643001903767785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_48
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 112
+        width: 40
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 045be6ea01fd031f0800000000000000
+      internalID: -1067107848947845824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 21
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91ee7bd462c230710800000000000000
+      internalID: 1658217630826753561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_61
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 37
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2006234ca0eedc5a0800000000000000
+      internalID: -6499276957217038334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_62
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 64
+        width: 27
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f273cb1880dca810800000000000000
+      internalID: 1778025235904426741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_63
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 64
+        width: 42
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5a4672b2e40a9790800000000000000
+      internalID: -7522694855865775526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_64
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 27
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e2c0bd525f245460800000000000000
+      internalID: 7229455332642177767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_65
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 42
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4b89722e2e804540800000000000000
+      internalID: 4990144715924540236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_66
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 64
+        width: 32
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2974ea30ad26c2450800000000000000
+      internalID: 6065331486665361298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_67
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 64
+        width: 32
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b3a6faef51970010800000000000000
+      internalID: 1155051670593774512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_68
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 0
+        width: 71
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ff1e67c579573ff0800000000000000
+      internalID: -56478107926913039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_69
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 12
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d167078953cf26d70800000000000000
+      internalID: 9035061109579609629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_70
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 15
+        width: 21
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b70dddb103d2109f0800000000000000
+      internalID: -504071998639583109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_71
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 15
+        width: 37
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 511e4bb5c5f8df800800000000000000
+      internalID: 647831548249563413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_72
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 15
+        width: 27
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb35e31c24a987d30800000000000000
+      internalID: 4429459845019489215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_73
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 15
+        width: 42
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 033fa5355606c89f0800000000000000
+      internalID: -464890673219570896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: furniture_haunted_74
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba60e73551578b430800000000000000
+      internalID: 3798915020142544555
       vertices: []
       indices: 
       edges: []

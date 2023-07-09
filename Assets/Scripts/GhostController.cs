@@ -1,41 +1,55 @@
-
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent (typeof(SpriteRenderer))]
 public class GhostController : MonoBehaviour
 {
-    [SerializeField]
-    private AttributesScriptableObject attributesScriptableObject;
+    [SerializeField] private AttributesScriptableObject attributesScriptableObject;
+
+    [SerializeField] private GameController gameController;
     
-    // [SerializeField]
-    // public Text staminaText;
-    public float maxGhostStamina = 100;
+    private float _maxGhostStamina;
     private float _currentGhostStamina;
     private float _movementSpeed;
-    public float possessDistance = 5.0f;
+    private float _possessDistance;
     public float possessSpeed = 2.0f;
+    public float staminaRecoveryRate = 10;
+    public float sprintStaminaDepletionRate = 10;
+    public float possessStaminaDepletionRate = 10;
     public SfxController sfkController;
+    
+    public bool Spotted { get; set; }
+    public bool Visible { get; set; } = true;
+    public bool Fatigued { get; set; }
+    private bool _ftg;
     
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
     private static readonly int Haunting = Animator.StringToHash("Haunting");
+    private static readonly int SpottedTag = Animator.StringToHash("Spotted");
+    private static readonly int FatiguedTag = Animator.StringToHash("Fatigued");
     private Hauntable Haunted { get; set; }
-    private bool _startHaunt;
 
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-        _currentGhostStamina = maxGhostStamina;
+        _maxGhostStamina = attributesScriptableObject.Stamina;
+        _currentGhostStamina = _maxGhostStamina;
+        _movementSpeed = attributesScriptableObject.Speed;
+        _possessDistance = attributesScriptableObject.PossesionRange;
+    }
+
+    public void OnSpotted(bool isSpotted)
+    {
+        Spotted = isSpotted;
+        _animator.SetBool(SpottedTag, isSpotted);
     }
     
     private void Update()
     {
-        _movementSpeed = attributesScriptableObject.Speed;
         var distance = _movementSpeed * Time.deltaTime;
         var movement = new Vector3();
-        if (Haunted is null && AnimatorIsPlaying("GhostIdle"))
+        if (Haunted is null && Visible)
         {
             if (Input.GetKey(KeyCode.W))
             {
@@ -58,39 +72,27 @@ public class GhostController : MonoBehaviour
             
         }
 
-        if (Input.GetKey(KeyCode.E))
-        {
-            if (Haunted is null && AnimatorIsPlaying("GhostIdle"))
-            {
-                _startHaunt = false;
+        if (Input.GetKeyDown(KeyCode.E) && !Fatigued && _ftg)
+            if (Haunted is null && Visible)
                 HauntObject();
-            }
-            else if (AnimatorIsPlaying("Haunting"))
-            {
-                UnHauntObject();
-            }
-        }
-        else if (Input.GetKey(KeyCode.Q))
-        {
-            Scare();
-        }
+        
+        if (Input.GetKeyUp(KeyCode.E)) UnHauntObject();
+        if (Input.GetKey(KeyCode.Q)) Scare();
 
-        if (Input.GetKey(KeyCode.LeftShift) && _currentGhostStamina > 0)
+        if (Input.GetKey(KeyCode.LeftShift) && !Fatigued)
         {
-            float sprintStaminaDepletionRate = 10;
-
             // Increase movement speed when Left Shift is held down
             movement *= 2f; // You can adjust the multiplier to increase or decrease the speed boost
 
-            _currentGhostStamina -= sprintStaminaDepletionRate * Time.deltaTime; // Adjust depletion rate as needed
+            _currentGhostStamina -= sprintStaminaDepletionRate * Time.deltaTime;
+            
+            if (_currentGhostStamina < 0) OnFatigued(true);
         }
         transform.position += movement;
-        // staminaText.text = "Stamina: " + _currentGhostStamina + "%";
 
-        if (_currentGhostStamina > maxGhostStamina ) _currentGhostStamina = maxGhostStamina;
-
+        if (_currentGhostStamina > _maxGhostStamina ) _currentGhostStamina = _maxGhostStamina;
         
-        if (_startHaunt && !(Haunted is null))
+        if (Visible && !(Haunted is null))
         {
             if (Haunted.transform.position - transform.position != new Vector3())
             {
@@ -101,60 +103,85 @@ public class GhostController : MonoBehaviour
                 HauntObject();
             }
         }
+        
+        StaminaRecover(staminaRecoveryRate);
+        gameController.SetStaminaPercent(_currentGhostStamina / _maxGhostStamina);
+        _ftg = !Fatigued;
     }
 
-    public bool StaminaUse()
+    private void OnFatigued(bool isFatigued)
     {
-       return Input.GetKey(KeyCode.LeftShift); 
-    }
+        Fatigued = isFatigued;
+        
+        _animator.SetBool(FatiguedTag, isFatigued);
 
-    public void StaminaRecover(float recoverValue)
+        gameController.SetFatigued(isFatigued);
+        
+        if (isFatigued) sfkController.PlaySound("NoStamina");
+    }
+    
+    private bool StaminaUse()
     {
-        float staminaRecoveryRate = 10;
-        if (!StaminaUse() && _currentGhostStamina < maxGhostStamina)
+        if (Haunted is null) return Input.GetKey(KeyCode.LeftShift);
+        
+        _currentGhostStamina -= possessStaminaDepletionRate * Time.deltaTime;
+
+        if (!(_currentGhostStamina < 0))
         {
-            _currentGhostStamina += staminaRecoveryRate * Time.deltaTime;
-            _currentGhostStamina = Mathf.Clamp(_currentGhostStamina, 0f, maxGhostStamina);
+            return true;
         }
+        
+        _currentGhostStamina = 0;
+        UnHauntObject();
+        OnFatigued(true);
+
+        return true;
+    }
+
+    private void StaminaRecover(float recoverValue)
+    {
+        if (StaminaUse() || _currentGhostStamina >= _maxGhostStamina) return;
+        
+        _currentGhostStamina += recoverValue * Time.deltaTime;
+        _currentGhostStamina = Mathf.Clamp(_currentGhostStamina, 0f, _maxGhostStamina);
+
+        if (_currentGhostStamina >= _maxGhostStamina)
+            OnFatigued(false);
     }
 
     private void HauntObject()
     {
         Haunted = GetNearestInRange();
-        if (Haunted is null) return;
-        if (!_startHaunt)
-        {
-            _startHaunt = true;
-            return;
-        }
+        if (Haunted is null || !Visible) return;
 
         Haunted.Haunt();
         _animator.SetBool(Haunting,true );
         sfkController.PlaySound("PossessingAnObject");
-        _startHaunt = false;
-     }
+        Visible = false;
+    }
      
      private Hauntable GetNearestInRange()
     {
         var pos = transform.position;
         var dist = float.PositiveInfinity;
-        Hauntable targ = null;
+        Hauntable tar = null;
         foreach (var obj in Hauntable.Furniture)
         {
             var d = (pos - obj.transform.position).sqrMagnitude;
-            if (!(d < dist)||d > possessDistance) continue;
-            targ = obj;
+            if (!(d < dist)||d > _possessDistance) continue;
+            tar = obj;
             dist = d;
         }
 
-        return targ;
+        return tar;
     }
 
     private void UnHauntObject()
     {
-        if (Haunted is null) return;
+        if (Haunted is null || !AnimatorIsPlaying("Haunting")) return;
         Haunted.UnHaunt();
         _animator.SetBool(Haunting,false );
+        Visible = true;
         Haunted = null;
         sfkController.PlaySound("LeavingAnObject");
     }
