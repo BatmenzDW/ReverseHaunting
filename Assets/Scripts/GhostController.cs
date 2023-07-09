@@ -7,10 +7,10 @@ public class GhostController : MonoBehaviour
 
     [SerializeField] private GameController gameController;
     
-    public float maxGhostStamina = 100;
+    private float _maxGhostStamina;
     private float _currentGhostStamina;
     private float _movementSpeed;
-    public float possessDistance = 5.0f;
+    private float _possessDistance;
     public float possessSpeed = 2.0f;
     public float staminaRecoveryRate = 10;
     public float sprintStaminaDepletionRate = 10;
@@ -33,8 +33,10 @@ public class GhostController : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-        _currentGhostStamina = maxGhostStamina;
+        _maxGhostStamina = attributesScriptableObject.Stamina;
+        _currentGhostStamina = _maxGhostStamina;
         _movementSpeed = attributesScriptableObject.Speed;
+        _possessDistance = attributesScriptableObject.PossesionRange;
     }
 
     public void OnSpotted(bool isSpotted)
@@ -83,10 +85,12 @@ public class GhostController : MonoBehaviour
             movement *= 2f; // You can adjust the multiplier to increase or decrease the speed boost
 
             _currentGhostStamina -= sprintStaminaDepletionRate * Time.deltaTime;
+            
+            if (_currentGhostStamina < 0) OnFatigued(true);
         }
         transform.position += movement;
 
-        if (_currentGhostStamina > maxGhostStamina ) _currentGhostStamina = maxGhostStamina;
+        if (_currentGhostStamina > _maxGhostStamina ) _currentGhostStamina = _maxGhostStamina;
         
         if (Visible && !(Haunted is null))
         {
@@ -101,17 +105,19 @@ public class GhostController : MonoBehaviour
         }
         
         StaminaRecover(staminaRecoveryRate);
-        gameController.SetStaminaPercent(_currentGhostStamina / maxGhostStamina);
+        gameController.SetStaminaPercent(_currentGhostStamina / _maxGhostStamina);
         _ftg = !Fatigued;
     }
 
-    public void OnFatigued(bool isFatigued)
+    private void OnFatigued(bool isFatigued)
     {
         Fatigued = isFatigued;
         
         _animator.SetBool(FatiguedTag, isFatigued);
 
         gameController.SetFatigued(isFatigued);
+        
+        if (isFatigued) sfkController.PlaySound("NoStamina");
     }
     
     private bool StaminaUse()
@@ -134,12 +140,12 @@ public class GhostController : MonoBehaviour
 
     private void StaminaRecover(float recoverValue)
     {
-        if (StaminaUse() || _currentGhostStamina >= maxGhostStamina) return;
+        if (StaminaUse() || _currentGhostStamina >= _maxGhostStamina) return;
         
         _currentGhostStamina += recoverValue * Time.deltaTime;
-        _currentGhostStamina = Mathf.Clamp(_currentGhostStamina, 0f, maxGhostStamina);
+        _currentGhostStamina = Mathf.Clamp(_currentGhostStamina, 0f, _maxGhostStamina);
 
-        if (_currentGhostStamina >= maxGhostStamina)
+        if (_currentGhostStamina >= _maxGhostStamina)
             OnFatigued(false);
     }
 
@@ -162,7 +168,7 @@ public class GhostController : MonoBehaviour
         foreach (var obj in Hauntable.Furniture)
         {
             var d = (pos - obj.transform.position).sqrMagnitude;
-            if (!(d < dist)||d > possessDistance) continue;
+            if (!(d < dist)||d > _possessDistance) continue;
             tar = obj;
             dist = d;
         }
