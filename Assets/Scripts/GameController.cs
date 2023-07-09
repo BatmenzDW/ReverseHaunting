@@ -51,7 +51,7 @@ public class GameController : MonoBehaviour
         if (_nightOver && _houseValue > 0) Win(); 
     }
 
-    private void LoseValue(int value)
+    public void LoseValue(int value)
     {
         _houseValue -= value;
         _houseValue = Mathf.Clamp(_houseValue, 0, startingHouseValue);
@@ -88,6 +88,6 @@ public class GameController : MonoBehaviour
 
     public void Lose()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
 }

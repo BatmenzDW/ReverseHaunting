@@ -19,10 +19,10 @@ public class GhostController : MonoBehaviour
 
     private VisibilityEnum _viz = VisibilityEnum.Visible;
 
-    private VisibilityEnum Visibility
+    public VisibilityEnum Visibility
     {
         get => _viz;
-        set
+        private set
         {
             gameController.SetVisibility(value);
             _viz = value;
@@ -52,8 +52,10 @@ public class GhostController : MonoBehaviour
 
     public void OnSpotted(bool isSpotted)
     {
-        Visibility = VisibilityEnum.Spotted;
+        if (Visibility.Equals(VisibilityEnum.NotVisible)) return;
+        
         _animator.SetBool(SpottedTag, isSpotted);
+        Visibility = isSpotted ? VisibilityEnum.Spotted : VisibilityEnum.Visible;
     }
 
     private static bool IsVisible(VisibilityEnum viz) => viz switch
@@ -67,7 +69,7 @@ public class GhostController : MonoBehaviour
     {
         var distance = _movementSpeed * Time.deltaTime;
         var movement = new Vector3();
-        if (Haunted is null && IsVisible(Visibility))
+        if (Haunted is null && Visibility.Equals(VisibilityEnum.Visible))
         {
             if (Input.GetKey(KeyCode.W))
             {
@@ -91,7 +93,7 @@ public class GhostController : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.E) && !Fatigued && _ftg)
-            if (Haunted is null && IsVisible(Visibility))
+            if (Haunted is null && Visibility.Equals(VisibilityEnum.Visible))
                 HauntObject();
         
         if (Input.GetKeyUp(KeyCode.E)) UnHauntObject();
@@ -110,7 +112,7 @@ public class GhostController : MonoBehaviour
 
         if (_currentGhostStamina > _maxGhostStamina ) _currentGhostStamina = _maxGhostStamina;
         
-        if (IsVisible(Visibility) && !(Haunted is null))
+        if (Visibility.Equals(VisibilityEnum.Visible) && !(Haunted is null))
         {
             if (Haunted.transform.position - transform.position != new Vector3())
             {
@@ -158,7 +160,7 @@ public class GhostController : MonoBehaviour
 
     private void StaminaRecover(float recoverValue)
     {
-        if (StaminaUse() || _currentGhostStamina >= _maxGhostStamina) return;
+        if (StaminaUse() || _currentGhostStamina >= _maxGhostStamina || Visibility.Equals(VisibilityEnum.Spotted)) return;
         
         _currentGhostStamina += recoverValue * Time.deltaTime;
         _currentGhostStamina = Mathf.Clamp(_currentGhostStamina, 0f, _maxGhostStamina);

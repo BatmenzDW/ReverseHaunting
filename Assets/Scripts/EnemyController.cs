@@ -3,59 +3,74 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent (typeof(SpriteRenderer))]
+[RequireComponent (typeof(Animator))]
 public class EnemyController : MonoBehaviour
 {
-    public GameObject pointA;
-    public GameObject pointB;
-    private Animator anim;
-    private Rigidbody2D rb;
-    private Transform currentPoint;
+    public List<Transform> points;
+    private int _pointIndex = 1;
+    private Animator _anim;
+    private SpriteRenderer _spriteRenderer;
+    [SerializeField] private GhostController player;
+    [SerializeField] private GameController gameController;
+    public float visionDistance = 5.0f;
     public float speed;
+    public float scareMeterMax = 5.0f;
+    public float scareMeterIncrement = 10f;
+    public float scareMeterDecrement = 1f;
+    public float _scareMeter;
+    private static readonly int IsMoving = Animator.StringToHash("isMoving");
 
     private void Start() 
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        currentPoint = pointB.transform;
-        anim.SetBool("isMoving",true);
-
+        _anim = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _anim.SetBool(IsMoving,true);
+        _scareMeter = scareMeterMax;
     }
 
-    private void Update() 
+    private void Update()
     {
-        Vector2 point = currentPoint.position - transform.position;
-        if(currentPoint == pointB.transform)
+        var diff = (points[_pointIndex].position - transform.position);
+        if (diff.sqrMagnitude > 0)
         {
-            rb.velocity = new Vector2(speed, 0);
-         
+            var scaredSpeed = speed;
+            if (_scareMeter >= scareMeterMax)
+                scaredSpeed *= 2;
+            
+            transform.position =
+                Vector3.MoveTowards(transform.position, points[_pointIndex].position,  scaredSpeed * Time.deltaTime);
+            _spriteRenderer.flipX = (diff.x < 0);
         }
         else
         {
-            rb.velocity = new Vector2(-speed, 0);
+            // currentPoint = points[pointIndex];
+            _pointIndex++;
+            if (_pointIndex >= points.Count) _pointIndex = 0;
+            
+            if (_scareMeter < scareMeterMax)
+                gameController.LoseValue(Random.Range(1000, 12500));
         }
 
-        if(Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint ==  pointB.transform)
+        // var angleToPlayer = Vector3.Angle(transform.position, player.transform.position);
+        var distToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        if (distToPlayer <= visionDistance && (player.Visibility.Equals(VisibilityEnum.Visible) || player.Visibility.Equals(VisibilityEnum.Spotted)))
         {
-            flip();
-            currentPoint = pointA.transform;
+            player.OnSpotted(true);
         }
-                if(Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint ==  pointA.transform)
+        else
         {
-            flip();
-            currentPoint = pointB.transform;
+            player.OnSpotted(false);
         }
-    }
 
-    private void flip()
-    {
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1;
-        transform.localScale = localScale;
-    }
-    private void OnDrawGizmos() 
-    {
-        Gizmos.DrawWireSphere(pointA.transform.position, 0.5f);
-        Gizmos.DrawWireSphere(pointB.transform.position, 0.5f);
-        Gizmos.DrawLine(pointA.transform.position, pointB.transform.position);
+        if (distToPlayer <= visionDistance && (player.Visibility.Equals(VisibilityEnum.NotVisible)))
+        {
+            _scareMeter += scareMeterIncrement * Time.deltaTime;
+        }
+        else
+        {
+            _scareMeter -= scareMeterDecrement * Time.deltaTime;
+            if (_scareMeter < 0) _scareMeter = 0;
+        }
     }
 }

@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
+        Hauntable.Furniture.Clear();
         SceneManager.LoadScene(1);
     }
 
